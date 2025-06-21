@@ -1,0 +1,54 @@
+# kubernetes/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-management
+  namespace: default
+  labels:
+    app: library-management
+spec:
+  replicas: 3 # 3 replicas for high availability
+  selector:
+    matchLabels:
+      app: library-management
+  template:
+    metadata:
+      labels:
+        app: library-management
+    spec:
+      containers:
+        - name: library-management
+          image: library-management:latest
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: library-app-config
+                  key: APP_ENV
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: library-app-config
+                  key: SPRING_PROFILES_ACTIVE
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30

@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: library-management
+  profiles:
+    active: ${APP_ENV:development}
+
+logging:
+  level:
+    com.library: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # Expose all actuator endpoints
+        include: "*"
+  endpoint:
+    show-details: always

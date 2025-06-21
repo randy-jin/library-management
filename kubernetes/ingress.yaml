@@ -1,0 +1,27 @@
+# kubernetes/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: library-management-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: library-api.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: library-management-service
+                port:
+                  number: 80
+  # Optional: TLS configuration
+  # tls:
+  # - hosts:
+  #   - library-api.local
+  #   secretName: library-tls-secret

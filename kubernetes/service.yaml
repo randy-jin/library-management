@@ -1,0 +1,17 @@
+# kubernetes/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-management-service
+  namespace: default
+  labels:
+    app: library-management
+spec:
+  selector:
+    app: library-management
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+  type: ClusterIP

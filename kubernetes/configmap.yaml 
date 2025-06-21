@@ -1,0 +1,9 @@
+# kubernetes/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: library-app-config
+  namespace: default
+data:
+  APP_ENV: "production"
+  SPRING_PROFILES_ACTIVE: "production"
