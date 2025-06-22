@@ -1,0 +1,10 @@
+# kubernetes/configmap-test.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: library-app-config
+  namespace: default
+data:
+  APP_ENV: "test"
+  SPRING_PROFILES_ACTIVE: "test"
+  logging.level.com.library: "INFO"

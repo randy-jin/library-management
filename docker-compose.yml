@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - APP_ENV=development
-      - SPRING_PROFILES_ACTIVE=development
+      - APP_ENV=dev
+      - SPRING_PROFILES_ACTIVE=dev
     volumes:
       - ./logs:/app/logs
     restart: unless-stopped

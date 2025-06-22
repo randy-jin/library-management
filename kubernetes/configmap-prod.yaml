@@ -1,4 +1,4 @@
-# kubernetes/configmap.yaml
+# kubernetes/configmap-prod.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,3 +8,6 @@ data:
   APP_ENV: "prod"
   SPRING_PROFILES_ACTIVE: "prod"
   logging.level.com.library: "INFO"
+  DB_HOST: "mysql-service"
+  DB_NAME: "library_prod"
+  DB_USER: "app_user"

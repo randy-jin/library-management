@@ -1,10 +1,10 @@
-# kubernetes/configmap.yaml
+# kubernetes/configmap-dev.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: library-app-config
   namespace: default
 data:
-  APP_ENV: "prod"
-  SPRING_PROFILES_ACTIVE: "prod"
+  APP_ENV: "dev"
+  SPRING_PROFILES_ACTIVE: "dev"
   logging.level.com.library: "INFO"

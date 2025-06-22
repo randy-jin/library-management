@@ -18,10 +18,12 @@ spec:
     spec:
       containers:
         - name: library-management
-          image: randyjin/library-management-app:latest
+          image: randyjin/library-management-app:v1.1.1
+          imagePullPolicy: IfNotPresent  # Use local image if available
           ports:
             - containerPort: 8080
               name: http
+          # Inject environment variables from ConfigMap
           env:
             - name: APP_ENV
               valueFrom:
@@ -33,6 +35,10 @@ spec:
                 configMapKeyRef:
                   name: library-app-config
                   key: SPRING_PROFILES_ACTIVE
+          # Alternative: Inject ALL ConfigMap values as env vars
+          # envFrom:
+          # - configMapRef:
+          #     name: library-app-config
           resources:
             requests:
               memory: "256Mi"
